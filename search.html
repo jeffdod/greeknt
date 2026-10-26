@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#e8e6df">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Greek NT">
+<title>Explore Variants · The Greek New Testament According to the Byzantine Text</title>
+<meta name="description" content="Find every note in the Edition Apparatus by edition, passage, kind of difference, effect on the English, Greek word, or English word, and download the results as a spreadsheet.">
+<link rel="canonical" href="https://greeknt.org/search.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Guardian Press">
+<meta property="og:title" content="Explore Variants">
+<meta property="og:description" content="Find every note in the Edition Apparatus by edition, passage, kind of difference, effect on the English, Greek word, or English word.">
+<meta property="og:url" content="https://greeknt.org/search.html">
+<meta property="og:image" content="https://greeknt.org/images/social-search.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/EBGaramond-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="explorer.css">
+<link rel="stylesheet" href="english.css">
+<link rel="stylesheet" href="xhero.css">
+<link rel="stylesheet" href="vdialog.css">
+<link rel="stylesheet" href="stats.css">
+<link rel="stylesheet" href="compare.css">
+<link rel="stylesheet" href="pin.css">
+<link rel="stylesheet" href="notes.css">
+<link rel="stylesheet" href="pageviewer.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+<a class="skip" href="#top">Skip to main content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html"><b>Guardian</b> Press</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="index.html">The edition</a>
+      <a href="variants.html">Fifty variants</a>
+      <a href="stats.html">Compare editions</a>
+      <a href="search.html">Explore variants</a>
+      <a href="manuscripts.html">Manuscripts</a>
+      <a href="about.html">About</a>
+      <a href="errata.html">Errata</a>
+      <a class="nav-dl" href="index.html#get">Get the edition</a>
+    </nav>
+    <details class="navmenu">
+      <summary>Menu</summary>
+      <nav class="navmenu-list" aria-label="Menu">
+        <a href="index.html">The edition</a>
+        <a href="variants.html">Fifty variants</a>
+        <a href="stats.html">Compare editions</a>
+        <a href="search.html">Explore variants</a>
+        <a href="manuscripts.html">Manuscripts</a>
+        <a href="about.html">About</a>
+        <a href="errata.html">Errata</a>
+        <a href="index.html#get">Get the edition</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="xhero">
+    <div class="wrap">
+      <h1>Explore variants</h1>
+      <p class="lede">Find every note in the Edition Apparatus by edition, passage, kind of difference, effect on the English, or a Greek or English word. Each result shows the note, its verse in Greek and English, and a word-by-word comparison of each reading. For the totals, see <a href="stats.html">Compare editions</a>.</p>
+    </div>
+  </div>
+
+  <section id="find">
+    <div class="wrap">
+      <div class="head">
+        <h2>Choose what to look for</h2>
+      </div>
+      <form class="filters" id="filters">
+        <label>Edition
+          <select id="fEd"></select>
+        </label>
+        <label>What it does
+          <select id="fRel">
+            <option value="differs">Differs from the main text</option>
+            <option value="bracket">Brackets or chevrons the main text</option>
+            <option value="either">Differs or brackets the main text</option>
+            <option value="split">Has a split line (ECM†)</option>
+          </select>
+        </label>
+        <label>Where
+          <select id="fWhere"></select>
+        </label>
+        <label>Kind of difference
+          <select id="fKind">
+            <option value="">Any</option>
+            <option value="same">Reads the same as the base text</option>
+            <option value="brw">Has bracketed text</option>
+            <option value="bronly">Only the brackets differ</option>
+            <option value="spell">Different spelling</option>
+            <option value="order">Different word order</option>
+            <option value="omitall">Omits the base reading</option>
+            <option value="omit">Omits words</option>
+            <option value="add">Adds words</option>
+            <option value="repl">Replaces the base text</option>
+            <option value="elide">Elision</option>
+            <option value="krasis">Crasis</option>
+            <option value="br1">Single brackets around reading</option>
+            <option value="br2">Double brackets around reading</option>
+            <option value="br3">Chevrons around reading</option>
+            <option value="other">Other</option>
+            <option value="short">Shortens the text (fewer words than the base reading)</option>
+            <option value="long">Lengthens the text (more words than the base reading)</option>
+          </select>
+        </label>
+        <label>Pattern among editions
+          <select id="fPat">
+            <option value="">Any</option>
+            <option value="critall">Critical editions agree</option>
+            <option value="critsplit">Critical editions divide</option>
+            <option value="byz">A Byzantine edition differs</option>
+            <option value="trcrit">TR joins a critical edition</option>
+            <option value="ct">A critical edition differs (CT)</option>
+            <option value="na">NA27 or NA28 differs (NA)</option>
+            <option value="tr">SCR or ST differs (TR)</option>
+            <option value="nadis">NA27 and NA28 disagree</option>
+            <option value="trdis">SCR and ST disagree</option>
+          </select>
+        </label>
+        <label>Effect on the English
+          <select id="fEff">
+            <option value="">Any</option>
+            <option value="yes">Changes the English</option>
+            <option value="no">No change to the English</option>
+          </select>
+        </label>
+        <label class="span2">Passage
+          <input id="fRef" type="text" list="bookList" placeholder="e.g. Romans 8 or John 1:18-25" autocomplete="off" spellcheck="false">
+          <datalist id="bookList"></datalist>
+        </label>
+        <label class="span2">Greek word or phrase
+          <input id="fGreek" type="text" placeholder="accents optional, e.g. και" autocomplete="off" lang="grc" data-beta aria-describedby="fGreekHint">
+          <small class="fhint" id="fGreekHint">Type Greek or CCAT beta code, such as lo/gos, and it turns into Greek as you type. To search for Latin text such as om., put it in double quotation marks: "om." και.</small>
+        </label>
+        <label class="span2">English word or phrase
+          <input id="fEng" type="text" placeholder="e.g. firstborn, or &quot;love one another&quot;" autocomplete="off" spellcheck="false" aria-describedby="fEngHint">
+          <small class="fhint" id="fEngHint">The words must all be in the verse, or all in the translation hints of the note. A word matches from its beginning, so bear also finds bearing. Put a phrase in double quotation marks.</small>
+        </label>
+        <div class="fgroup" id="ntGroup" hidden>
+          <div class="fgtitle">Your own notes</div>
+          <label id="ntFilter1" hidden>Notes shown
+            <select id="fMine">
+              <option value="">All notes</option>
+              <option value="yes">Only notes I have written on</option>
+            </select>
+          </label>
+          <label class="span2" id="ntFilter2" hidden>Words in my notes
+            <input id="fMyText" type="text" placeholder="a word from a title or a note" autocomplete="off" spellcheck="false" aria-describedby="fMyTextHint">
+            <small class="fhint" id="fMyTextHint">Finds the footnotes where a note you wrote has all these words in its title or text.</small>
+          </label>
+          <button type="button" class="btn btn-quiet fgbtn" id="ntList" hidden>Open my notes list</button>
+        </div>
+        <div class="fbar">
+          <div class="fsub"><div class="fcap">This search</div>
+            <div class="frow">
+              <button type="button" class="btn btn-quiet" id="fReset">Clear all</button>
+              <button type="button" class="btn btn-quiet" id="fShare">Copy link to this search</button>
+            </div>
+          </div>
+          <div class="fsub"><div class="fcap">Download as a spreadsheet</div>
+            <div class="frow">
+              <button type="button" class="btn btn-quiet" id="fCsv" title="Download every matching note as a spreadsheet file (CSV)">Results as CSV</button>
+              <button type="button" class="btn btn-quiet" id="fCsvWide" title="Download every matching note as a spreadsheet file with one row for each note and a column for each edition (CSV)">One row per note (CSV)</button>
+            </div>
+            <div class="csvopts"><span>Also include:</span>
+              <label><input type="checkbox" id="fCsvVerse"> the verse in Greek and English</label>
+              <label><input type="checkbox" id="fCsvHint"> translation hints</label>
+            </div>
+          </div>
+        </div>
+      </form>
+      <p class="specnote" id="restored" hidden>This is your last search on this device. Choose “Clear all” to start again.</p>
+      <div class="achips" id="achips" aria-label="Choices in force" hidden></div>
+      <div class="rhead">
+        <p id="rcount" aria-live="polite">Loading the notes…</p>
+        <p id="catnote" class="specnote" hidden></p>
+        <div id="pagechip"></div>
+      </div>
+      <div class="nores" id="nores" aria-live="polite" hidden></div>
+      <div class="strip" id="strip" aria-label="Where the matching notes fall in the edition, page by page"></div>
+      <div class="stripscale" id="stripscale"></div>
+      <div class="sortrow">
+        <label for="fSort">Sort the results</label>
+        <select id="fSort">
+          <option value="">In the order of the edition</option>
+          <option value="most">Most editions differing first</option>
+        </select>
+        <label class="showgr"><input type="checkbox" id="fShowGr" checked> Show the Greek under each note</label>
+        <label class="showen"><input type="checkbox" id="fShowEn" checked> Show the English under each note</label>
+      </div>
+      <details class="readnote" id="readnote">
+        <summary>How to read a note</summary>
+        <div class="hw-body">
+          <p class="hw-intro">Each note in the results looks like the one below, shown here with its comparison and translation hints opened. Tap a number in the note to read about that part, or a line in the list below it to see which part it describes.</p>
+          <ol class="results hw-note" id="hwA" data-note="333"></ol>
+          <ol class="hw-keys" data-for="hwA">
+            <li data-part="head">Where the note is: the verse, the page of the printed edition (the number opens that page), and the note’s letter on the page.</li>
+            <li data-part="main">The main text: the words of this edition that the note is about. Readings are given without accents, as the apparatus prints them.</li>
+            <li data-part="reading">A reading. The tags name the editions that print it; point at a group tag such as CT to see which editions it stands for. A tag in brackets, such as [PT], means that edition prints it in brackets, and in double brackets, such as [[ECM]], in double brackets. RP<sup>mg</sup> is the alternate Byzantine reading in the Robinson-Pierpont edition. The words in italics say what kind of difference it is.</li>
+            <li data-part="cmpbtn">“Show comparison” opens a word-by-word comparison of the reading with the main text, as it is open here. The button then reads “Hide comparison.”</li>
+            <li data-part="cmp">The comparison: the main text on the top row and the reading below it, one card for each Greek word, numbered in order. Point at a word, or select it, to see which word it matches in the other row.</li>
+            <li data-part="card">Each card gives the word’s dictionary form and Strong’s number, a short meaning, and how the word is parsed. A note in red at the foot of a card, such as “different form,” says how the word differs from its partner, and the part that differs is highlighted. For a longer reading, the same red note appears under the two details when you point at a word.</li>
+            <li data-part="greek">The verse in the Greek of this edition. The shaded words are the ones the note covers.</li>
+            <li data-part="english">The verse in English (ASVBT). Neither this line nor the Greek above it is a variant reading.</li>
+            <li data-part="copy">Copy the verse, or the whole note, as plain text. Point at or tap any Greek word in the note for its meaning and parsing.</li>
+            <li data-part="hints">“Translation hints,” opened here, gives one line for each reading, under the same edition tags, saying how that reading would change the English, or that it would not.</li>
+          </ol>
+          <p class="hw-key">An edition that a note does not name reads the same as the main text.</p>
+          <p class="hw-key">Each result also has a Pin button at its top right, to keep your place. See “Keeping your place” under “How this page works.”</p>
+          <h3 class="hw-h">Notes with an ellipsis (…)</h3>
+          <ol class="results hw-note" id="hwB" data-note="752"></ol>
+          <ol class="hw-keys" data-for="hwB">
+            <li data-part="main">In the main text, “…” stands for words left out to save space: the words between the first and the last. The Greek verse shows them with a lighter shade.</li>
+            <li data-part="reading">In a reading, “…” means the words in between are the same as in the main text. Only the words at the ends differ: here “and” in place of “or.”</li>
+            <li data-part="reading2">A reading without “…”, such as “om.”, covers the whole stretch, the words in between included. Here the whole clause is missing.</li>
+            <li data-part="cmp">In the comparison, the words a “…” stands for, in the main text or in a reading, are filled in from the verse and marked with a red bracketed span, so that the whole stretch can be compared.</li>
+          </ol>
+        </div>
+      </details>
+      <ol class="results" id="results"></ol>
+      <p class="more"><button type="button" class="btn btn-quiet" id="more" hidden>Show more</button></p>
+      <div class="caveat">
+        <p>An edition not named in a note reads the same as the main text. A note records only a place where at least one edition differs from the main text, so these figures describe the apparatus, not the editions as a whole. Readings appear exactly as the edition prints them. Most are printed without accents; where the edition prints a reading with accents, the accents are kept. Page numbers are the numbers printed in the book. Open “How this page works” for the details.</p>
+        <details class="howto">
+          <summary>How this page works</summary>
+          <h3>Finding notes</h3>
+          <p>Each choice you make appears as a button above the results; select it to remove that choice. The number beside each choice in the lists is how many notes it would show. The strip under the count shows where in the edition the matching notes fall, page by page. The words you search for are highlighted in the verse and in the translation hints.</p>
+          <h3>Reading the notes</h3>
+          <p>Punctuation and spacing in compound words are not recorded in the apparatus, and accents and a movable nu or final sigma are recorded only where a reading shows them. The Greek under each note is the text of this edition, verse by verse. Point at a Greek word, or tap it, to see its Strong’s number, dictionary form, gloss, and parsing. The word you are pointing at turns blue and is underlined, with a pale blue box behind it, so it is not confused with the red shading, which marks only the words the note covers. The shading was placed by software; a note about words the main text does not contain, such as a verse it omits, shows the verse without any shading. Where the main text of a note has an ellipsis (…), the words quoted are shaded and the words in between get a lighter shade, so that the whole stretch the note covers can be seen. The English is the Boyd ASVBT, a form of the American Standard Version made to follow the Byzantine text, which is in the public domain; it is matched verse for verse to this edition, so a verse number this edition prints without text has no English. An English search looks in the verses a note covers and in the translation hints, not in the wording of the note itself. A note that matches only through its hints shows them open, with the words highlighted. “Effect on the English” comes from an English translation of this Greek text, whose footnotes mark the places where a variant changes the translation. A note is marked “Changes the English” when that translation has a footnote at the same place. A further group of notes was added to the marked list after a second reading of the apparatus, where a reading clearly adds, drops, or replaces a word or clause, or changes who or how many; changes of spelling, tense, word order, or articles were left unmarked unless the English clearly changes. Every other note is marked “No change to the English.” A note whose translation hint says that the English is the same is also marked “No change to the English,” even where the translation had a footnote there. The marks reflect judgment, not a measurement, and a few variants may matter to the English more or less than the marks suggest. Both spreadsheet downloads have a column, “Changes the English,” with Yes or No for each note.</p>
+          <h3>Kinds of difference</h3>
+          <p>The kind of difference is worked out automatically by comparing the words of the main text and the reading, and every reading has one main kind, which may be joined by the note “has bracketed text.” A reading “reads the same as the base text” when it has the same words in the same order, or “only the brackets differ” when it has the same words in the same order and some of them are in brackets. Bracketed words or letters can also appear in a reading of any other kind, such as a different word order or an added word; the Kind filter “Has bracketed text” finds all of these, and the reading shows the note after its kind. It has a “different spelling” when the words correspond one for one but at least one is spelled differently, and “different word order” when it has the same words rearranged. It “omits the base reading” when it leaves out all of the main-text words, “omits words” when it leaves out some of them, in one place or several, with the rest in the same order, and “adds words” when it adds words in one place or several, with the main-text words in the same order. Any other reading “replaces the base text.” “Elision” and “crasis” are used when that is the only difference, as in αλλ’ for αλλα, or κακει for και εκει. A reading that is only a bracketed list of editions is “single brackets,” “double brackets,” or “chevrons around reading,” and a few readings that are described in English are labeled “Other.” Two words are the same word when they have the same Strong’s number from the Robinson-Pierpont text and the same part of speech and are spelled alike. A word with the same Strong’s number and parsing but a different spelling is a spelling difference. A movable nu or final sigma is treated as the same word only where the reading marks it in parentheses, as in εστι(ν). Accents and breathings are compared only when both words show them. A word that has no analysis in the Robinson-Pierpont data counts as the same word in a different spelling when it differs only in a way that old spellings often do, such as ει for ι. “Shortens the text” and “Lengthens the text” are counted by words alone: a reading with fewer words than the main text shortens it, and one with more words lengthens it, whatever its kind.</p>
+          <h3>Word comparison</h3>
+          <p>“Show comparison” under a reading lines its words up against the main text, with each word’s dictionary form, Strong’s number, gloss and parsing. Each number is the place of a word in the main text, and its partner in the reading carries the same number. Shading marks a difference, so words that are unchanged and in place are left plain. A plus sign and a striped box mark a word the reading adds, and a dashed outline marks a main-text word the reading omits. A reading of up to six words shows every word with its details. For a longer reading, point at a word, or select it, to see the details below; when a word and its partner are not identical, both are shown and the differences are marked. In either layout, words that move together share one shade, a word that is spelled or parsed differently has a shade of its own, and unchanged words in place are left plain. When a word and its partner are spelled differently, the fewest letters that differ are highlighted and underlined with a wavy line: if you took the marked letters out of both words, the letters left would be the same letters in the same order. A word that only has an extra letter shows the mark on the longer word alone. A full cell, or the details shown for a longer reading, also says “spelled differently.” A pair that is the same dictionary word in a different form, such as a present and an aorist participle, is noted as “different form,” with the parsing highlighted and no letters marked; a pair with the same spelling but a different parsing is noted as “parsed differently,” and a pair of different dictionary words as “different word,” with the spelling and the dictionary form highlighted. Where the reading replaces a stretch of the main text with the same number of different words, they are paired one to one, in order. With a different number of words, a word is paired only with a word that shares more than a third of its letters. An ellipsis (…) in the main text stands for words the note does not quote. The comparison fills it in with the actual words from the verse, shown in a red bracketed span, so that the reading’s words are paired with real words of the main text and are not mistaken for additions. If the reading has an ellipsis of its own, it is filled in the same way, with the words of the main text that lie between its neighboring words. A movable nu or final sigma that the reading puts in parentheses does not count as a difference. The pairing is worked out by software from Strong’s numbers and spellings, as for the kinds of difference, and a word with no analysis in the Robinson-Pierpont data is shown without one. Where one word has letters the other lacks, a thin yellow line between the letters of the shorter word shows where they would go. A crasis, where two words in one text are written as one word in the other, is shown as a group: pointing at any of its boxes outlines all of them, and a line under the boxes explains that they are the same words written together. When a reading replaces one word of the main text with one other word of the same kind, such as one verb with another verb, or one conjunction with another, the two are paired as a replacement and marked “different word,” even if they stand in different places in their texts. A single negative word left over on each side, such as ουδε and ουδενι, is paired the same way even when the two are different kinds of word.</p>
+          <h3>Translation hints</h3>
+          <p>A note that changes the English has a “Translation hints” link under its readings, and so do many notes whose English stays the same; the hint then says so. Opening it shows approximate English for the changed words only, in the style of the Boyd ASVBT. It is not part of the ASVBT. Each hint is marked with the edition labels of the readings it describes, in the same order and spacing as in the variant list. On a computer, pointing at any edition label shows the edition’s full name. Quotation marks in a hint always enclose English. A Greek word that the English does not show is named in Greek, with its meaning in parentheses. A hint does not rebuild the whole verse, and it is not part of the printed edition either. It is an aid for reading the note, and the Greek and the manuscript evidence remain the authority.</p>
+          <h3>Keeping your place</h3>
+          <p>The Pin button on a note marks it with a red bar so you can find it again. Only one note is pinned at a time, and pinning another note moves the pin. While a note is pinned, a bar offers Previous and Next, which move the pin through the notes now listed. Tap once to move by one note; press and hold to move faster, in steps of 1, 3, 10 and then 25 notes. The page scrolls to the note when you let go. Tap the number in the middle (such as “65 of 10,178”) to type a note number and go straight to it. “Go to pin” brings you back to the pinned note, and “Unpin” removes the pin. For ten seconds after the pin is removed, by Unpin or by selecting Pinned on the note, the bar offers “Undo” to put it back. On a keyboard, the left and right arrow keys do the same as Previous and Next. If you change your choices so that the pinned note is no longer listed, the pin stays and the bar says so; “Show it” clears your choices and takes you to the note. The pin is remembered on this device, along with your last search, until you unpin it.</p>
+          <h3>My notes</h3>
+          <p>Where your device can keep them safely, each footnote has a Note button. It opens a panel showing the footnote and its readings, with one tab for the footnote as a whole and one for each reading, labeled with the editions that print it. Each tab holds a note of your own, with an optional title. The panel records when you created each note and when you last edited it. A note appears in the results right where it belongs: under the footnote’s heading, or under the reading it is about. A footnote with no notes looks as it always does. “Only notes I have written on” and “Words in my notes” find your notes, and the “Open my notes list” button lists them all, sorted by date, passage or title. These three controls are together in the “Your own notes” group, which appears only where notes can be kept. A pinned footnote has a Note button in the pin bar too.</p>
+          <p>Notes are stored in this browser only; nothing is sent anywhere. On an iPhone or iPad, and in Safari on a Mac, a site’s stored data can be erased after a week without a visit, so notes are offered there only when the site is installed as an app (on an iPhone or iPad, Share and then Add to Home Screen; on a Mac, File and then Add to Dock). On Android they are offered in the installed app (Install app in the browser menu), and on a computer in any other browser. Each device keeps its own notes. To move notes between devices, or to keep a copy, open your notes list and choose Back up, restore and export. A backup file restores your notes on any device; when a note is in both, the more recently edited version is kept, and the restore can be undone. A readable copy shows each note with its footnote and readings, as text or a spreadsheet, and can include the verse; it cannot be restored.</p>
+          <h3>The spreadsheet download</h3>
+          <p>There are two spreadsheet downloads, and each contains every matching note, not only the ones shown on the page. “Results as CSV” has one row for each reading, one row for each case where an edition prints the main-text reading in brackets, and one row where ECM prints a split guiding line. “One row per note (CSV)” has a single row for each note and a column for each edition (HF, PCK, PT, ECM, NA27, NA28, SBL, TH, WH, SCR, ST and the Robinson-Pierpont alternate reading), saying what that edition reads there: the reading itself, or “(main text)” where the edition reads the main text. Where an edition prints the main text in brackets or double brackets, the cell says so, and the ECM split guiding line is marked †. Both files give the book number, chapter and first verse as plain numbers, so that a spreadsheet can sort the notes in the order of the edition, and a column for the number of editions that differ and for the effect on the English. When a note is also one of the fifty variants, a column lists the manuscripts cited for each reading, with the readings separated by ‖, with raised marks written as superscript characters (for example 399ᶜᵛⁱᵈ). The two boxes below the buttons add more columns to either file: the verse in Greek and in the ASVBT, and the translation hints (in the one-reading-per-row file, the hint for that reading; in the one-row-per-note file, every hint of the note, each marked with its editions). Files with the verse or the hints are larger.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<dialog id="vdialog" aria-labelledby="vtitle">
+  <div class="vd">
+    <div class="vd-bar">
+      <button type="button" class="vd-nav" id="vprev" aria-label="Previous variant">‹</button>
+      <button type="button" class="vd-nav" id="vnext" aria-label="Next variant">›</button>
+      <button type="button" class="vd-close" id="vclose" aria-label="Close">Close</button>
+    </div>
+    <div class="vd-body" id="vbody"></div>
+  </div>
+</dialog>
+
+<footer>
+  <div class="wrap">
+    <span>Guardian Press</span>
+    <span>The text of this edition is in the public domain.</span>
+  </div>
+</footer>
+
+<script src="notes-data.js"></script>
+<script src="data.js"></script>
+<script src="copy.js"></script>
+<script src="pageviewer.js"></script>
+<script src="greekinput.js"></script>
+<script src="manuscripts-data.js"></script>
+<script src="english.js"></script>
+<script src="english-effect.js"></script>
+<script src="hints-ids.js"></script>
+<script src="greek.js"></script>
+<script src="greek-tip.js"></script>
+<script src="compare.js"></script>
+<script src="notes.js"></script>
+<script src="pin.js"></script>
+<script src="stats.js"></script>
+<script src="readnote.js"></script>
+<script src="explorer.js"></script>
+<script src="menu.js"></script>
+<script src="backnav.js"></script>
+<script src="pwa.js" defer></script>
+<script src="scrolljump.js"></script>
+<script data-goatcounter="https://greeknt.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

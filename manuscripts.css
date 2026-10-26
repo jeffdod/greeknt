@@ -1,0 +1,142 @@
+/* Manuscripts page */
+.sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* Century colors */
+:root{
+  --c2:#8a6410;--c3:#a24f14;--c4:#a3281e;--c5:#7d2f5c;--c6:#4b3a8f;--c7:#2a5590;--c8:#17666c;--c9:#2f6a3b;--c10:#68691c;--c11:#7a5628;--cx:#565c68;
+}
+.cc2{--cc:var(--c2)}.cc3{--cc:var(--c3)}.cc4{--cc:var(--c4)}.cc5{--cc:var(--c5)}.cc6{--cc:var(--c6)}
+.cc7{--cc:var(--c7)}.cc8{--cc:var(--c8)}.cc9{--cc:var(--c9)}.cc10{--cc:var(--c10)}.cc11{--cc:var(--c11)}.cc0{--cc:var(--cx)}
+
+/* Summary strip */
+#ms-summary{padding-bottom:10px}
+.sumstrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.sumcell{background:var(--vellum);border:1px solid var(--rule);border-top:4px solid var(--cc,var(--rubric));padding:12px 16px}
+.sumcell b{display:block;font-size:2.1rem;line-height:1.05;font-weight:500;color:var(--cc,var(--rubric))}
+.sumcell span{font-size:.95rem;color:var(--ink-soft)}
+.sumcell.s1{--cc:var(--c4)}.sumcell.s2{--cc:var(--c7)}.sumcell.s3{--cc:var(--c9)}.sumcell.s4{--cc:var(--c5)}.sumcell.s5{--cc:var(--c3)}
+
+/* Century bar */
+.agebar-wrap{margin-top:22px}
+.agebar{display:flex;align-items:flex-end;gap:6px;height:130px;padding:0 2px}
+.agecol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;height:100%;min-width:0;cursor:pointer;background:none;border:0;padding:0;font:inherit;color:inherit}
+.agecol .bar{background:var(--cc);height:var(--h);min-height:3px;border-radius:3px 3px 0 0;position:relative;transition:filter .15s}
+.agecol:hover .bar,.agecol[aria-pressed="true"] .bar{filter:brightness(1.18) saturate(1.2)}
+.agecol .n{font-size:.85rem;text-align:center;color:var(--ink-soft);line-height:1.3}
+.agecol .r{font-size:.9rem;text-align:center;font-variant:small-caps;letter-spacing:.04em;border-top:1px solid var(--rule);margin-top:3px;padding-top:2px;color:var(--ink)}
+.agecol[aria-pressed="true"] .r{color:var(--cc);font-weight:600}
+
+/* Filters */
+.msfilters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.3fr;gap:14px;margin:26px 0 8px;padding:16px 18px;background:var(--vellum);border:1px solid var(--rule);border-left:3px solid var(--rubric)}
+.msfilters .f label{display:block;font-weight:600;font-size:.92rem;margin-bottom:4px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em}
+.msfilters input,.msfilters select{display:block;width:100%;font:inherit;font-size:1.02rem;color:inherit;background:#f9f7f1;border:1px solid var(--rule);border-radius:3px;padding:.4em .6em}
+.msfilters input:focus,.msfilters select:focus{outline:2px solid var(--rubric);outline-offset:1px}
+.count{margin:12px 0 18px;color:var(--ink-soft)}
+
+/* Cards */
+.msgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:20px}
+.mscard{position:relative;display:grid;perspective:1500px;scroll-margin:80px 0 84px;transition:transform .15s}
+.mscard:hover{transform:translateY(-3px)}
+.mscard:target,.mscard.hit{outline:3px solid var(--cc);outline-offset:2px;border-radius:4px}
+.flip{display:grid;position:relative;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.45,.05,.25,1)}
+.mscard.flipped .flip{transform:rotateY(180deg)}
+.face{grid-area:1/1;min-width:0;background:var(--vellum);border:1px solid var(--rule);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 0 rgba(0,0,0,.04);transition:box-shadow .15s;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.mscard:hover .face{box-shadow:0 10px 22px rgba(30,40,55,.16)}
+.face.back{transform:rotateY(180deg)}
+.mscard .band{background:linear-gradient(120deg,var(--cc),color-mix(in srgb,var(--cc) 60%,#1f2a36));color:#fff;padding:9px 16px;display:flex;justify-content:space-between;align-items:baseline;font-size:.98rem;letter-spacing:.03em}
+.mscard .band .kind{text-transform:uppercase;font-size:.8rem;letter-spacing:.1em;opacity:.92}
+.mscard .band .date{font-variant:small-caps;font-size:1.05rem}
+.mscard .top{display:flex;align-items:center;gap:14px;padding:14px 16px 4px}
+.mscard .glyph{flex:0 0 auto;min-width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--cc) 10%,#fbfaf6);border:2px solid var(--cc);color:var(--cc);font-family:"GFS Didot","EB Garamond",serif;font-size:1.9rem;line-height:1;padding:0 6px}
+.mscard .glyph.long{font-size:1.25rem;border-radius:32px}
+.mscard .glyph sup{font-size:.6em;position:relative;top:-.55em;vertical-align:baseline;line-height:0;align-self:center}
+.mscard h3{margin:0;font-size:1.2rem;line-height:1.2;font-weight:500}
+.mscard h3 small{display:block;font-size:.9rem;color:var(--ink-soft);font-weight:400;margin-top:2px}
+.mscard .body{padding:6px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.8rem;letter-spacing:.04em;padding:.1em .6em;border-radius:999px;border:1px solid var(--cc);color:var(--cc);background:#fbfaf6}
+.tag.ct{border-color:var(--rule);color:var(--ink)}
+.tag.ct b{font-weight:600;color:var(--cc)}
+.where{font-size:.98rem;color:var(--ink);line-height:1.35}
+.where .sh{color:var(--ink-soft)}
+.where.unk{color:var(--ink-soft);font-style:italic}
+.meter{margin-top:auto}
+.meter .lbl{display:flex;justify-content:space-between;font-size:.9rem;color:var(--ink-soft);margin-bottom:3px}
+.meter .lbl b{color:var(--ink);font-weight:600}
+.meter .track{height:9px;background:#dcd8cc;border-radius:5px;overflow:hidden}
+.meter .fill{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--c7),var(--c8));border-radius:5px}
+.meter.na .lbl{font-style:italic}
+.cited{font-size:.92rem;color:var(--ink-soft)}
+.cited a{color:var(--rubric)}
+.empty{padding:40px 0;text-align:center;color:var(--ink-soft);font-size:1.1rem}
+
+/* Legend */
+.legend{margin-top:48px;max-width:var(--measure);border-top:1px solid var(--rule);padding-top:22px}
+.legend h2{font-size:1.4rem;margin:0 0 10px}
+.legend ul{padding-left:1.2em;margin:0}
+.legend li{margin:0 0 8px}
+
+/* Links on cards */
+.mlinks{display:flex;flex-wrap:wrap;gap:4px 14px;border-top:1px solid var(--rule);padding-top:10px;font-size:.92rem}
+.mlinks a,.linkbtn{color:var(--rubric);text-decoration:underline;text-underline-offset:2px}
+.linkbtn{font:inherit;background:none;border:0;padding:0;cursor:pointer}
+.linkbtn:hover,.mlinks a:hover{color:var(--rubric-dark)}
+.count .linkbtn{margin-left:14px;font-size:.98rem}
+
+/* Back of a card: where the manuscript is cited */
+.bmid{padding:6px 16px 8px;display:flex;flex-direction:column;gap:8px}
+.bhead{margin:0;font-size:1.02rem;font-weight:600;color:var(--cc)}
+.bhead:focus{outline:none}
+.blist-wrap{position:relative;flex:1;min-height:210px;border-top:1px solid var(--rule)}
+.blist{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;list-style:none;margin:0;padding:2px 16px 22px;-webkit-overflow-scrolling:touch}
+.blist li{padding:9px 0;border-bottom:1px dotted var(--rule);font-size:.95rem;line-height:1.35}
+.blist li:last-child{border-bottom:0}
+.bfoot{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 16px;border-top:1px solid var(--rule);font-size:.95rem}
+.bfoot a{color:var(--rubric)}
+@media (prefers-reduced-motion:reduce){.flip,.mscard{transition:none}}
+@media print{.face.back{display:none}.mscard{perspective:none}}
+
+/* Back of a card, tuned: one line of contents, a scroll hint, and a clearer "See where" button */
+.bkinds{font-size:.92rem;color:var(--ink-soft);line-height:1.35}
+.bmid{gap:5px}
+.cited{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.seewhere{font:inherit;font-size:.92rem;color:var(--cc);background:#fbfaf6;border:1.5px solid var(--cc);border-radius:999px;padding:.1em .9em;cursor:pointer;white-space:nowrap}
+.seewhere:hover{background:var(--cc);color:#fff}
+.seewhere:focus-visible{outline:3px solid var(--cc);outline-offset:2px}
+
+/* Back of a card at the same size as the front: a tighter header leaves room for the list */
+.face.back .top{padding:8px 16px 2px;gap:12px}
+.face.back .glyph{min-width:44px;height:44px;font-size:1.4rem;border-width:1.5px}
+.face.back .glyph.long{font-size:1rem;border-radius:24px}
+.face.back h3{font-size:1.1rem}
+.face.back h3 small{font-size:.85rem;margin-top:0}
+.bmid{padding:4px 16px 8px}
+.bkinds{font-size:.85rem;line-height:1.3}
+.bhrow{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.blist-wrap{min-height:0}
+.blist li{padding:6px 0;font-size:.92rem;line-height:1.3}
+.bfoot{padding:8px 16px}
+
+/* Back of a card: the list is just links to the passages */
+.blist{display:flex;flex-wrap:wrap;align-content:flex-start;gap:7px 7px;padding:10px 16px 26px}
+.blist li{padding:0;border:0;font-size:.95rem}
+.blist li a{display:block;padding:.2em .75em;border:1px solid var(--rule);border-radius:999px;background:#fbfaf6;color:var(--rubric);text-decoration:none;white-space:nowrap}
+.blist li a:hover{border-color:var(--rubric);background:#fff}
+.blist li a:focus-visible{outline:2px solid var(--rubric);outline-offset:1px}
+
+/* Back of a card: clear signs that the list scrolls */
+.blist::-webkit-scrollbar{width:12px}
+.blist::-webkit-scrollbar-track{background:rgba(31,42,54,.07);border-radius:6px}
+.blist::-webkit-scrollbar-thumb{background:var(--cc);border-radius:6px;border:2px solid var(--vellum)}
+@supports not selector(::-webkit-scrollbar){.blist{scrollbar-color:var(--cc) rgba(31,42,54,.1)}}
+.blist-wrap::before,.blist-wrap::after{content:"";position:absolute;left:0;right:14px;height:28px;pointer-events:none;opacity:0;transition:opacity .2s;z-index:1}
+.blist-wrap::before{top:0;background:linear-gradient(to top,rgba(243,241,234,0),var(--vellum))}
+.blist-wrap::after{bottom:0;background:linear-gradient(to bottom,rgba(243,241,234,0),var(--vellum))}
+.blist-wrap.can-up::before,.blist-wrap.can-down::after{opacity:1}
+.bmore{display:none;position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:2;font:inherit;font-size:.9rem;line-height:1.4;color:#fff;background:var(--cc);border:0;border-radius:999px;padding:.1em 1em;box-shadow:0 2px 8px rgba(20,28,38,.3);cursor:pointer;white-space:nowrap}
+.blist-wrap.can-down .bmore{display:block}
+.bmore:hover{filter:brightness(1.15)}
+@media (prefers-reduced-motion:reduce){.blist-wrap::before,.blist-wrap::after{transition:none}}
+
+@media (max-width:980px){.msfilters{grid-template-columns:1fr 1fr}.msfilters .f-search{grid-column:1/-1}}
+@media (max-width:520px){.msfilters{grid-template-columns:1fr}}

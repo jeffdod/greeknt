@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#e8e6df">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Greek NT">
+<title>Compare Editions · The Greek New Testament According to the Byzantine Text</title>
+<meta name="description" content="Where the notes fall, what kinds of difference they record, how each of the eleven editions compares with the main text, and where the Robinson-Pierpont edition offers an alternate Byzantine reading, counted note by note.">
+<link rel="canonical" href="https://greeknt.org/stats.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Guardian Press">
+<meta property="og:title" content="Compare Editions">
+<meta property="og:description" content="Where the notes fall, what kinds of difference they record, how eleven editions compare with the Byzantine main text, and the alternate Byzantine readings.">
+<meta property="og:url" content="https://greeknt.org/stats.html">
+<meta property="og:image" content="https://greeknt.org/images/social-stats.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/EBGaramond-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="explorer.css">
+<link rel="stylesheet" href="xhero.css">
+<link rel="stylesheet" href="pageviewer.css">
+<link rel="stylesheet" href="stats.css">
+<link rel="stylesheet" href="print.css" media="print">
+</head>
+<body>
+<a class="skip" href="#top">Skip to main content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html"><b>Guardian</b> Press</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="index.html">The edition</a>
+      <a href="variants.html">Fifty variants</a>
+      <a href="stats.html">Compare editions</a>
+      <a href="search.html">Explore variants</a>
+      <a href="manuscripts.html">Manuscripts</a>
+      <a href="about.html">About</a>
+      <a href="errata.html">Errata</a>
+      <a class="nav-dl" href="index.html#get">Get the edition</a>
+    </nav>
+    <details class="navmenu">
+      <summary>Menu</summary>
+      <nav class="navmenu-list" aria-label="Menu">
+        <a href="index.html">The edition</a>
+        <a href="variants.html">Fifty variants</a>
+        <a href="stats.html">Compare editions</a>
+        <a href="search.html">Explore variants</a>
+        <a href="manuscripts.html">Manuscripts</a>
+        <a href="about.html">About</a>
+        <a href="errata.html">Errata</a>
+        <a href="index.html#get">Get the edition</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="xhero">
+    <div class="wrap">
+      <h1>Compare editions</h1>
+      <p class="lede">Every note in the Edition Apparatus, counted. See where the notes fall, including where they change the English, what kinds of difference they record, how each of the eleven editions compares with the main text, and where the Robinson-Pierpont edition offers an alternate Byzantine reading (RP<sup>mg</sup>). Every bar and square opens the matching notes in <a href="search.html">Explore variants</a>.</p>
+    </div>
+  </div>
+
+  <section id="density">
+    <div class="wrap">
+      <div class="head">
+        <h2>Where the notes fall</h2>
+        <p class="lede">Each square is one chapter, and each row is one book. A darker square means more notes in that chapter. Select a square to list its notes. The second button below counts only the notes that change the English.</p>
+      </div>
+      <div class="kpick" id="dpick" role="group" aria-label="What to shade"></div>
+      <div class="dkey" id="dkey" aria-hidden="true"></div>
+      <div class="dscroll"><div class="dmap" id="dmap"></div></div>
+      <p class="caveat dhint">On a narrow screen, swipe the squares sideways to reach later chapters.</p>
+      <p class="caveat" id="dnote"></p>
+      <p class="caveat" id="den" hidden></p>
+    </div>
+  </section>
+
+  <section id="kinds">
+    <div class="wrap">
+      <div class="head">
+        <h2>Which editions shorten or lengthen the text most?</h2>
+        <p class="lede" id="kindlede"></p>
+      </div>
+      <div class="kpick" id="kindkey" role="group" aria-label="Kind of change"></div>
+      <div class="kgrid" id="kgrid"></div>
+      <p class="caveat" id="kindnote"></p>
+      <details class="tablebox">
+        <summary>Show the figures as a table</summary>
+        <div class="gridwrap"><table class="agree" id="ktable"></table></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="chart">
+    <div class="wrap">
+      <div class="head">
+        <h2>How each edition compares with the main text</h2>
+        <p class="lede" id="chartlede"></p>
+      </div>
+      <div class="gkey fam-key" id="famkey"></div>
+      <div class="cgrid" id="cgrid"></div>
+      <p class="caveat" id="chartnote"></p>
+      <details class="tablebox">
+        <summary>Show the figures as a table</summary>
+        <div class="gridwrap"><table class="agree" id="ctable"></table></div>
+        <p class="caveat" id="tablenote"></p>
+      </details>
+    </div>
+  </section>
+
+  <section id="alone">
+    <div class="wrap">
+      <div class="head">
+        <h2>Standing alone</h2>
+        <p class="lede" id="alolede"></p>
+      </div>
+      <div class="gkey fam-key" id="alokey"></div>
+      <div class="agrid" id="agrid"></div>
+      <p class="caveat" id="alonote"></p>
+    </div>
+  </section>
+
+  <section id="rpmg">
+    <div class="wrap">
+      <div class="head">
+        <h2>Alternate Byzantine readings (RP<sup>mg</sup>)</h2>
+        <p class="lede" id="rplede"></p>
+      </div>
+      <h3 class="subhead">Which books are the most divided</h3>
+      <p class="lede" id="rpwho"></p>
+      <label class="rtoggle"><input type="checkbox" id="rpRev" checked> Include Revelation</label>
+      <div class="agrid" id="rgrid"></div>
+      <p class="caveat" id="rnote"></p>
+      <h3 class="subhead">Which editions agree most with RP<sup>mg</sup> readings</h3>
+      <p class="lede" id="rpwith"></p>
+      <div class="agrid" id="egrid"></div>
+      <p class="caveat" id="enote"></p>
+      <h3 class="subhead">Where an RP<sup>mg</sup> reading sides with the critical text</h3>
+      <p class="lede" id="rpcrit"></p>
+      <div class="ctabwrap"><table class="ctab" id="ctab"><thead><tr><th scope="col">Passage</th><th scope="col">Main text</th><th scope="col">Alternate reading</th><th scope="col">Also read by</th></tr></thead><tbody id="clist"></tbody></table></div>
+      <p class="caveat" id="cnote"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Guardian Press</span>
+    <span>The text of this edition is in the public domain.</span>
+  </div>
+</footer>
+
+<script src="notes-data.js"></script>
+<script src="pageviewer.js"></script>
+<script src="english-effect.js"></script>
+<script src="stats.js"></script>
+<script src="menu.js"></script>
+<script src="backnav.js"></script>
+<script src="pwa.js" defer></script>
+<script src="scrolljump.js"></script>
+<script data-goatcounter="https://greeknt.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

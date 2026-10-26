@@ -19,9 +19,9 @@ const spots = [
   {key:"marker",  box:[70,573,81,584], cls:"small"}
 ];
 const parts = {
-  text:    {name:"Main text", html:"<p>The Greek text of the Robinson–Pierpont Byzantine Textform 2026. It reads cleanly on its own; all the notes wait at the bottom of the page.</p>"},
-  verse:   {name:"Verse numbers", html:"<p>Small numbers in the text mark where each verse begins. Here you can see verses 23, 24 and 25 of Matthew 1.</p>"},
-  chapter: {name:"Chapter number", html:"<p>A large number in the margin marks the start of a new chapter. Here, Matthew 2 begins.</p>"},
+  text:    {name:"Main text", html:"<p>The Greek text of the Robinson-Pierpont Byzantine Textform 2026. It reads cleanly on its own; all the notes wait at the bottom of the page.</p>"},
+  verse:   {name:"Verse numbers", html:"<p>Small numbers in the text mark where each verse begins. Here you can see verses 23, 24 and 25 of Matthew 1.</p><p>The first verse of a chapter usually has no small number, because the large chapter number stands in for it. The exception is a chapter that begins in the middle of a paragraph, as Mark 9 does. There the text runs on around the large chapter number, and verse 1 is marked with a small \u201c1\u201d where it begins.</p>"},
+  chapter: {name:"Chapter number", html:"<p>A large number in the margin marks the start of a new chapter. Here, Matthew 2 begins. Most chapters also begin a new paragraph.</p>"},
   marker:  {name:"Footnote letters", zoom:["text","edition","manuscript"], html:"<p>A small letter sits just before any words that have a note. The note with the same letter in the footnotes explains what other editions read.</p><p>The letter <i>e</i> in 1:25, before <span class='greek'>τὸν υἱὸν αὐτῆς τὸν πρωτότοκον</span>, matches note <i>e</i> in the Edition Apparatus. Because this is also one of the fifty selected variants, the same letter <i>e</i> appears again in the Manuscript Apparatus below it.</p>"},
   app1:    {name:"Edition Apparatus", zoom:["edition"], html:"<p>The first set of footnotes shows where eleven landmark printed Greek New Testaments differ from the main text.</p><p>Each note gives the letter, the verse and the main-text wording, then a broken bar (¦), then the editions that differ and what they read. In note <i>e</i>, “CT υιον” means the critical-text editions read only <span class='greek'>υἱόν</span>, “a son,” instead of “her firstborn son.”</p>"},
   app2:    {name:"Manuscript Apparatus", zoom:["manuscript"], html:"<p>The second set of footnotes always sits below the first, and appears only where one of the fifty selected variants falls on the page. It adds manuscript evidence for a variant already noted in the Edition Apparatus, so it uses the same footnote letter.</p><p>Here, note <i>e</i> lists the handwritten manuscripts on each side of Matthew 1:25: C, D, E, K, W and many others support the main text, while Codex Sinaiticus (ℵ), Codex Vaticanus (B), Z and 33 have the shorter reading.</p>"},
@@ -29,9 +29,9 @@ const parts = {
   folio:   {name:"Page number", html:"<p>Page numbers appear on the outer edge of each page.</p>"}
 };
 const zooms = {
-  text:       {src:"images/zoom-caller-text.jpg",       w:796, h:223, cap:"In the main text, the letter e sits just before the words it marks."},
-  edition:    {src:"images/zoom-caller-edition.jpg",    w:1057, h:257, cap:"Edition Apparatus, note e."},
-  manuscript: {src:"images/zoom-caller-manuscript.jpg", w:1053, h:183, cap:"Manuscript Apparatus: the same letter e begins the entry."}
+  text:       {src:"images/zoom-caller-text.webp",       w:796, h:223, cap:"In the main text, the letter e sits just before the words it marks."},
+  edition:    {src:"images/zoom-caller-edition.webp",    w:1057, h:257, cap:"Edition Apparatus, note e."},
+  manuscript: {src:"images/zoom-caller-manuscript.webp", w:1053, h:183, cap:"Manuscript Apparatus: the same letter e begins the entry."}
 };
 const info = document.getElementById('info');
 const chips = document.getElementById('chips');
@@ -44,7 +44,7 @@ spots.forEach(s=>{
   el.setAttribute('aria-label', parts[s.key].name);
   el.style.left = (l/PAGE_W*100)+'%';  el.style.top = (t/PAGE_H*100)+'%';
   el.style.width = ((r-l)/PAGE_W*100)+'%'; el.style.height = ((b-t)/PAGE_H*100)+'%';
-  el.addEventListener('click', ()=>show(s.key));
+  el.addEventListener('click', ()=>show(s.key, el));
   sheet.appendChild(el);
 });
 Object.keys(parts).forEach(k=>{
@@ -52,12 +52,63 @@ Object.keys(parts).forEach(k=>{
   b.className='chip'; b.textContent=parts[k].name; b.dataset.key=k;
   b.onclick=()=>show(k); chips.appendChild(b);
 });
-function show(key){
+function show(key, fromEl){
   const p=parts[key]; if(!p) return;
   const zhtml = p.zoom ? '<div class="zoomset">'+p.zoom.map(z=>{const q=zooms[z];return `<figure class="zoom"><img src="${q.src}" width="${q.w}" height="${q.h}" alt="Magnified: ${q.cap}"><figcaption>${q.cap}</figcaption></figure>`}).join('')+'</div>' : '';
   info.innerHTML=`<h3>${p.name}</h3>${p.html}${zhtml}`;
   sheet.querySelectorAll('.hot').forEach(el=>el.classList.toggle('on',el.dataset.key===key));
   chips.querySelectorAll('.chip').forEach(el=>el.classList.toggle('on',el.dataset.key===key));
+  curKey=key;
+  if(small.matches) openSheet(fromEl || sheet.querySelector('.hot[data-key="'+key+'"]'));
+}
+
+/* On phones the explanation slides up from the bottom of the screen (styles are in style.css) */
+const small = window.matchMedia('(max-width:860px)');
+const panel = document.querySelector('#explore .panel');
+const section = document.getElementById('explore');
+const keys = Object.keys(parts);
+let curKey = null;
+const bar = document.createElement('div');
+bar.className = 'sheetbar';
+bar.innerHTML = '<button type="button" class="sb-prev" aria-label="Previous part">\u2039 Previous</button>'
+  + '<span class="sb-count" aria-hidden="true"></span>'
+  + '<button type="button" class="sb-next" aria-label="Next part">Next \u203a</button>'
+  + '<button type="button" class="sb-close" aria-label="Close explanation">\u00d7</button>';
+panel.insertBefore(bar, panel.firstChild);
+const sbCount = bar.querySelector('.sb-count');
+function step(n){
+  const i = Math.max(0, keys.indexOf(curKey));
+  show(keys[(i+n+keys.length)%keys.length]);
+}
+bar.querySelector('.sb-prev').addEventListener('click', ()=>step(-1));
+bar.querySelector('.sb-next').addEventListener('click', ()=>step(1));
+bar.querySelector('.sb-close').addEventListener('click', closeSheet);
+function closeSheet(){ panel.classList.remove('open'); }
+function openSheet(el){
+  sbCount.textContent = (keys.indexOf(curKey)+1) + ' of ' + keys.length;
+  panel.classList.add('open');
+  if(el) bringIntoView(el);
+}
+/* Scroll the page so the chosen spot is not hidden behind the sheet */
+function bringIntoView(el){
+  const tb = document.querySelector('.topbar');
+  const topLim = (tb ? Math.max(0, tb.getBoundingClientRect().bottom) : 0) + 10;
+  const botLim = window.innerHeight - Math.min(panel.offsetHeight, window.innerHeight*0.46) - 10;
+  const r = el.getBoundingClientRect();
+  let d = 0;
+  if(r.height > botLim - topLim) d = r.top - topLim;
+  else if(r.top < topLim || r.bottom > botLim) d = (r.top + r.bottom)/2 - (topLim + botLim)/2;
+  if(Math.abs(d) > 2){
+    const calm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    window.scrollBy({top:d, behavior: calm ? 'auto' : 'smooth'});
+  }
+}
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape' && panel.classList.contains('open') && !document.getElementById('lightbox').open) closeSheet();
+});
+small.addEventListener('change', ()=>{ if(!small.matches) closeSheet(); });
+if('IntersectionObserver' in window){
+  new IntersectionObserver(es=>{ if(!es[0].isIntersecting) closeSheet(); }).observe(section);
 }
 
 /* Enlarge the page */
@@ -70,18 +121,18 @@ lb.addEventListener('click',e=>{ if(e.target===lb) lb.close(); });
    To add or change a page: put the image in the "images" folder
    and add a line below with its file name and a caption.          */
 const samples = [
-  {src:"images/matthew-1.jpg",    title:"Matthew 1, page 1"},
-  {src:"images/matthew-1-23.jpg", title:"Matthew 1:23–2:9, with both apparatuses"},
-  {src:"images/john-1.jpg",       title:"The opening of John"},
-  {src:"images/1-john-5.jpg",     title:"1 John 5, with manuscript evidence for 5:7–8"},
-  {src:"images/appendix-a.jpg",   title:"Appendix A: Robinson–Pierpont edition changes"},
-  {src:"images/appendix-d.jpg",   title:"Appendix D: List of cited manuscripts"}
+  {src:"images/matthew-1.webp",    title:"Matthew 1, page 1"},
+  {src:"images/matthew-1-23.webp", title:"Matthew 1:23–2:9, with both apparatuses"},
+  {src:"images/john-1.webp",       title:"The opening of John"},
+  {src:"images/1-john-5.webp",     title:"1 John 5, with manuscript evidence for 5:7–8"},
+  {src:"images/appendix-a.webp",   title:"Appendix A: Robinson-Pierpont edition changes"},
+  {src:"images/appendix-d.webp",   title:"Appendix D: List of cited manuscripts"}
 ];
 const track=document.getElementById('track'), dots=document.getElementById('dots'), cap=document.getElementById('sampleCaption');
 samples.forEach((s,i)=>{
   const slide=document.createElement('div'); slide.className='slide';
   slide.setAttribute('role','group'); slide.setAttribute('aria-label',`${i+1} of ${samples.length}: ${s.title}`);
-  slide.innerHTML=`<a href="${s.src}" target="_blank" rel="noopener"><img src="${s.src}" width="1000" height="1480" alt="Sample page: ${s.title}" ${i>1?'loading="lazy"':''}></a>`;
+  slide.innerHTML=`<a href="${s.src}" target="_blank" rel="noopener"><img src="${s.src}" width="1000" height="1480" alt="Sample page: ${s.title}" loading="lazy" decoding="async"></a>`;
   track.appendChild(slide);
   const d=document.createElement('button'); d.className='dot'; d.setAttribute('aria-label',`Go to page ${i+1}`);
   d.onclick=()=>go(i); dots.appendChild(d);
