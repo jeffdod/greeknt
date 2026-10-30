@@ -80,7 +80,7 @@
       y += hRow; rule(y - 2, 0.5, RULE);
     });
     y += 10;
-    block([R(doc.count + ' Meanings from the Strong’s dictionary, as shown on the site.', 'reg', 9.5, SOFT)], 9.5, 13, W - 2 * M);
+    block([R(doc.count + ' Strong’s numbers identify the words; the meanings are from the Dodson Greek-English Lexicon, compiled by J. Jeffrey Dodson in 2010.', 'reg', 9.5, SOFT)], 9.5, 13, W - 2 * M);
     pages.forEach(function (p, i) {
       p.push({ k: 't', x: M, y: H - M + 6, t: 'greeknt.org', f: 'reg', s: 9, c: SOFT });
       p.push({ k: 't', x: W - M, y: H - M + 6, t: 'Page ' + (i + 1) + ' of ' + pages.length, f: 'reg', s: 9, c: SOFT, a: 'r' });

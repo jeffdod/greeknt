@@ -136,7 +136,7 @@
       tb.appendChild(tr);
     });
     t.appendChild(tb); wrap.appendChild(t); box.appendChild(wrap);
-    box.appendChild(el('p', 'vb-foot', num(m.rows.length) + (m.rows.length === 1 ? ' word' : ' words') + ' from ' + num(m.total) + ' in the passage. Meanings from the Strong\u2019s dictionary, as shown on the site.'));
+    box.appendChild(el('p', 'vb-foot', num(m.rows.length) + (m.rows.length === 1 ? ' word' : ' words') + ' from ' + num(m.total) + ' in the passage. Strong\u2019s numbers identify the words; the meanings are from the Dodson Greek-English Lexicon, compiled by J. Jeffrey Dodson in 2010.'));
   }
 
   /* ---------- downloads ---------- */
